@@ -62,6 +62,10 @@
   transform: translateY(-1px);
 }
 
+.button-container button:focus-visible {
+  transform: translateY(-1px);
+}
+
 .button-container button:active {
   transform: translateY(3px);
 }
