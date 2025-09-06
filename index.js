@@ -3,22 +3,31 @@ const mainDisplay = document.getElementById("main-display");
 
 function calculate(expression) {
   const expressionArray = expression.split(" ");
-  const num1 = expressionArray[0];
-  const num2 = expressionArray[2];
-  const operator = expressionArray[1];
+  const loop = expressionArray.length;
+  let total = Number(expressionArray[0]);
+  for(let i = 1; i + 1 < loop; i += 2) {
 
-  switch (operator) {
-    case "+":
-      return Number(num1) + Number(num2);
-    case "-":
-      return Number(num1) - Number(num2);
-    case "x":
-      return Number(num1) * Number(num2);
-    case "/":
-      return Number(num1) / Number(num2);
-    default:
-      return "Error";
+    const operator = expressionArray[i];
+    const num2 = expressionArray[i+1];
+
+    switch (operator) {
+      case "+":
+        total += Number(num2);
+        break;
+      case "-":
+        total -= Number(num2);
+        break;
+      case "x":
+        total *= Number(num2);
+        break;
+      case "/":
+        total = num2 === 0 ? NaN : total / num2;
+        break;
+      default:
+        return "Error";
+    }
   }
+  return total;
 };
 
 document.querySelectorAll(".button-container button").forEach(btn => {
