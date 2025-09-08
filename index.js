@@ -64,6 +64,10 @@ function calcPercent(expression) {
   const num1 = Number(newOperands[0]);
   const operator = newOperands[1];
   const num2 = Number(newOperands[2]);
+
+  if (!newOperands[1]) {
+    return num1;
+  }
   
   switch(operator) {
     case "+":
