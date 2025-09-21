@@ -30,13 +30,29 @@ function calculate(expression) {
   return total;
 };
 
+function isOperatorHanging(expression) {
+  const operators = ['+', '-', 'x', '/'];
+  const lastChar = expression.length - 1;
+  return !operators.includes(expression[lastChar]);
+}
+
+function isOperatorEqual(expression, operator) {
+  const lastChar = expression.length - 1;
+  return expression[lastChar] === operator;
+}
+
 document.querySelectorAll(".button-container button").forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.dataset.value) {
       mainDisplay.textContent += btn.dataset.value;
     }
     if (btn.dataset.operator) {
-      mainDisplay.textContent += " " + btn.dataset.operator + " ";
+      if (isOperatorHanging(mainDisplay.textContent.trim())) {
+        mainDisplay.textContent += " " + btn.dataset.operator + " ";
+      } else if (!isOperatorEqual(mainDisplay.textContent.trim(), btn.dataset.operator)){
+        const lastChar = mainDisplay.textContent.length - 2;
+        mainDisplay.textContent = mainDisplay.textContent.slice(0, lastChar) + btn.dataset.operator + " ";
+      }
     }
     if (btn.dataset.action === "=") {
       secondaryDisplay.textContent = mainDisplay.textContent;
